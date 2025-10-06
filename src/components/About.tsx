@@ -1,67 +1,19 @@
 import { motion } from "motion/react";
 import { useInView } from "motion/react";
 import { useRef } from "react";
-import { Badge } from "./ui/badge";
-import { Card, CardContent } from "./ui/card";
-import { Button } from "./ui/button";
+import { Chip, Card, CardContent, Button } from "@mui/material";
+import { portfolioData, experienceData } from "../data";
 
-const timelineEvents = [
-  {
-    year: "2023-10",
-    period: "Present",
-    title: "Associate Analyst",
-    company: "Deloitte USI",
-    location: "Mumbai, India",
-    description:
-      "Associate Analyst at Deloitte USI focusing on web development, API optimization, and database performance improvements using cutting-edge technologies.",
-    technologies: [
-      "React",
-      "TypeScript",
-      "Python",
-      "FastAPI",
-      "SQL",
-      "Tailwind CSS",
-    ],
-    achievements: [
-      "Increased user engagement metrics by 25% by refining user interface design and functionality",
-      "Lowered development costs by 15% by enhancing coding efficiency",
-      "Enhanced API performance, resulting in a 30% reduction in system latency",
-      "Optimized user interface performance by 20% employing cutting-edge React techniques",
-      "Improved database query efficiency by 50% by restructuring SQL tables and queries",
-      "Enhanced system reliability by 40% through timely debugging and resolution of critical issues",
-    ],
-  },
-  {
-    year: "2022-08",
-    period: "2023-09",
-    title: "Full Stack Developer",
-    company: "Digital Solutions Ltd.",
-    location: "Remote",
-    description:
-      "Developed and maintained multiple client projects, focusing on performance and user experience optimization.",
-    technologies: ["Vue.js", "Python", "PostgreSQL", "Docker"],
-    achievements: [
-      "Built responsive web applications serving 10,000+ daily active users",
-      "Reduced page load times by 40% through code optimization and caching strategies",
-      "Implemented automated testing reducing bugs in production by 60%",
-    ],
-  },
-  {
-    year: "2020-06",
-    period: "2022-07",
-    title: "Frontend Developer",
-    company: "Creative Agency",
-    location: "New York, USA",
-    description:
-      "Created responsive web interfaces and collaborated with design teams to deliver pixel-perfect implementations.",
-    technologies: ["JavaScript", "CSS", "React", "Figma"],
-    achievements: [
-      "Delivered 25+ high-quality web projects for diverse client portfolio",
-      "Improved cross-browser compatibility reducing support tickets by 45%",
-      "Collaborated with UX team to increase user satisfaction scores by 35%",
-    ],
-  },
-];
+const timelineEvents = experienceData.experiences.map((exp) => ({
+  year: exp.startDate.substring(0, 4),
+  period: exp.current ? "Present" : exp.endDate?.substring(0, 4) || "",
+  title: exp.position,
+  company: exp.company,
+  location: exp.location,
+  description: exp.description,
+  technologies: exp.technologies,
+  achievements: exp.achievements,
+}));
 
 export function About() {
   const ref = useRef(null);
@@ -84,9 +36,12 @@ export function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            {portfolioData.sections.about.title}
+          </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Get to know more about who I am, what I do, and what skills I have
+            {portfolioData.sections.about.subtitle}.{" "}
+            {portfolioData.personal.bio}
           </p>
         </motion.div>
 
@@ -137,7 +92,9 @@ export function About() {
                     <p className="text-sm font-medium text-muted-foreground">
                       Location
                     </p>
-                    <p className="text-sm font-semibold">San Francisco, CA</p>
+                    <p className="text-sm font-semibold">
+                      {portfolioData.personal.location}
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -168,7 +125,9 @@ export function About() {
                     <p className="text-sm font-medium text-muted-foreground">
                       Experience
                     </p>
-                    <p className="text-sm font-semibold">5+ Years</p>
+                    <p className="text-sm font-semibold">
+                      {portfolioData.stats.yearsExperience} Years
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -196,7 +155,9 @@ export function About() {
                     <p className="text-sm font-medium text-muted-foreground">
                       Email
                     </p>
-                    <p className="text-sm font-semibold">pratik@example.com</p>
+                    <p className="text-sm font-semibold">
+                      {portfolioData.personal.email}
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -217,15 +178,10 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.5 }}
             >
               <h3 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                Full Stack Developer
+                {portfolioData.personal.title}
               </h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                I'm a passionate Full Stack Developer with over 5 years of
-                experience in creating beautiful, functional, and user-friendly
-                web applications. I specialize in React, Next.js, TypeScript,
-                and modern web technologies. When I'm not coding, you can find
-                me exploring new technologies, contributing to open source
-                projects, or sharing knowledge with the developer community.
+                {portfolioData.personal.description}
               </p>
             </motion.div>
 
@@ -241,14 +197,18 @@ export function About() {
                   <div className="bg-card border rounded-xl p-6 shadow-sm">
                     <h5 className="font-semibold mb-2">Frontend Development</h5>
                     <p className="text-sm text-muted-foreground">
-                      Creating responsive and interactive user interfaces with
-                      modern frameworks
+                      Building responsive and interactive user interfaces with
+                      React, TypeScript, and modern CSS frameworks like Tailwind
+                      CSS
                     </p>
                   </div>
                   <div className="bg-card border rounded-xl p-6 shadow-sm">
-                    <h5 className="font-semibold mb-2">3D Web Development</h5>
+                    <h5 className="font-semibold mb-2">
+                      Full Stack Development
+                    </h5>
                     <p className="text-sm text-muted-foreground">
-                      Creating immersive 3D experiences using Three.js
+                      Creating end-to-end web applications combining modern
+                      frontend with robust backend solutions
                     </p>
                   </div>
                 </div>
@@ -256,57 +216,21 @@ export function About() {
                   <div className="bg-card border rounded-xl p-6 shadow-sm">
                     <h5 className="font-semibold mb-2">Backend Development</h5>
                     <p className="text-sm text-muted-foreground">
-                      Building robust APIs and server-side applications
+                      Developing high-performance APIs and server-side
+                      applications using Python, FastAPI, and SQL databases
                     </p>
                   </div>
                   <div className="bg-card border rounded-xl p-6 shadow-sm">
-                    <h5 className="font-semibold mb-2">UI/UX Design</h5>
+                    <h5 className="font-semibold mb-2">
+                      Performance Optimization
+                    </h5>
                     <p className="text-sm text-muted-foreground">
-                      Designing beautiful and user-friendly interfaces
+                      Optimizing web applications for better user experience,
+                      API performance, and database query efficiency
                     </p>
                   </div>
                 </div>
               </div>
-            </motion.div>
-
-            {/* Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
-            >
-              <Button
-                onClick={scrollToContact}
-                className="bg-purple-600 hover:bg-purple-700 text-black border border-purple-500"
-              >
-                <svg
-                  className="w-4 h-4 mr-2"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-                Get in Touch
-              </Button>
-              <Button
-                variant="outline"
-                className="px-6 py-3 flex items-center justify-center gap-2"
-              >
-                <svg
-                  className="w-4 h-4"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Download Resume
-              </Button>
             </motion.div>
           </motion.div>
         </div>

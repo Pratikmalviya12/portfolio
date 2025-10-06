@@ -1,4 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
+import { CssBaseline } from '@mui/material'
+import { lightTheme, darkTheme } from '../theme/muiTheme'
 
 type Theme = 'dark' | 'light' | 'system'
 
@@ -30,22 +33,26 @@ export function ThemeProvider({
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
   )
 
+  const [actualTheme, setActualTheme] = useState<'light' | 'dark'>('light')
+
   useEffect(() => {
     const root = window.document.documentElement
 
     root.classList.remove('light', 'dark')
 
+    let resolvedTheme: 'light' | 'dark'
+    
     if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+      resolvedTheme = window.matchMedia('(prefers-color-scheme: dark)')
         .matches
         ? 'dark'
         : 'light'
-
-      root.classList.add(systemTheme)
-      return
+    } else {
+      resolvedTheme = theme
     }
 
-    root.classList.add(theme)
+    root.classList.add(resolvedTheme)
+    setActualTheme(resolvedTheme)
   }, [theme])
 
   const value = {
@@ -56,9 +63,14 @@ export function ThemeProvider({
     },
   }
 
+  const muiTheme = actualTheme === 'dark' ? darkTheme : lightTheme
+
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
-      {children}
+      <MuiThemeProvider theme={muiTheme}>
+        <CssBaseline />
+        {children}
+      </MuiThemeProvider>
     </ThemeProviderContext.Provider>
   )
 }

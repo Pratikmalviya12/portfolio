@@ -1,0 +1,92 @@
+{
+  "skills": [
+    {
+      "id": "1",
+      "name": "TypeScript",
+      "level": 90,
+      "category": "Frontend",
+      "icon": "📘",
+      "description": "Advanced TypeScript development with strong typing and modern patterns"
+    },
+    {
+      "id": "2",
+      "name": "JavaScript",
+      "level": 90,
+      "category": "Frontend",
+      "icon": "💛",
+      "description": "Expert-level JavaScript development with ES6+ features"
+    },
+    {
+      "id": "3",
+      "name": "React",
+      "level": 85,
+      "category": "Frontend",
+      "icon": "⚛️",
+      "description": "Advanced React development with hooks, context, and performance optimization"
+    },
+    {
+      "id": "4",
+      "name": "Zustand",
+      "level": 80,
+      "category": "Frontend",
+      "icon": "🐻",
+      "description": "State management with Zustand for React applications"
+    },
+    {
+      "id": "5",
+      "name": "Python",
+      "level": 85,
+      "category": "Backend",
+      "icon": "🐍",
+      "description": "Backend development with Python and modern frameworks"
+    },
+    {
+      "id": "6",
+      "name": "FastAPI",
+      "level": 80,
+      "category": "Backend",
+      "icon": "⚡",
+      "description": "High-performance API development with FastAPI framework"
+    },
+    {
+      "id": "7",
+      "name": "Tailwind CSS",
+      "level": 85,
+      "category": "Frontend",
+      "icon": "💨",
+      "description": "Utility-first CSS framework for rapid UI development"
+    },
+    {
+      "id": "8",
+      "name": "HTML",
+      "level": 90,
+      "category": "Frontend",
+      "icon": "🌐",
+      "description": "Semantic HTML5 markup and web standards"
+    },
+    {
+      "id": "9",
+      "name": "CSS",
+      "level": 85,
+      "category": "Frontend",
+      "icon": "🎨",
+      "description": "Modern CSS3 with animations, grid, and flexbox"
+    },
+    {
+      "id": "10",
+      "name": "SQL",
+      "level": 80,
+      "category": "Database",
+      "icon": "💾",
+      "description": "Database query optimization and advanced SQL techniques"
+    },
+    {
+      "id": "11",
+      "name": "Object-oriented Programming",
+      "level": 85,
+      "category": "Backend",
+      "icon": "🔧",
+      "description": "OOP principles and design patterns implementation"
+    }
+  ]
+}

@@ -1,8 +1,7 @@
 import { motion } from "motion/react";
 import { useInView } from "motion/react";
 import { useRef } from "react";
-import { Badge } from "./ui/badge";
-import { Card, CardContent } from "./ui/card";
+import { Chip, Card, CardContent } from "@mui/material";
 import {
   SiTypescript,
   SiJavascript,
@@ -21,64 +20,18 @@ import {
   SiVuedotjs,
   SiPostgresql,
 } from "react-icons/si";
+import { experienceData, portfolioData, skillsData } from "../data";
 
-const timelineEvents = [
-  {
-    year: "2023-10",
-    period: "Present",
-    title: "Associate Analyst",
-    company: "Deloitte USI",
-    location: "Mumbai, India",
-    description:
-      "Associate Analyst at Deloitte USI focusing on web development, API optimization, and database performance improvements using cutting-edge technologies.",
-    technologies: [
-      "React",
-      "TypeScript",
-      "Python",
-      "FastAPI",
-      "SQL",
-      "Tailwind CSS",
-    ],
-    achievements: [
-      "Increased user engagement metrics by 25% by refining user interface design and functionality",
-      "Lowered development costs by 15% by enhancing coding efficiency",
-      "Enhanced API performance, resulting in a 30% reduction in system latency",
-      "Optimized user interface performance by 20% employing cutting-edge React techniques",
-      "Improved database query efficiency by 50% by restructuring SQL tables and queries",
-      "Enhanced system reliability by 40% through timely debugging and resolution of critical issues",
-    ],
-  },
-  {
-    year: "2022-08",
-    period: "2023-09",
-    title: "Full Stack Developer",
-    company: "Digital Solutions Ltd.",
-    location: "Remote",
-    description:
-      "Developed and maintained multiple client projects, focusing on performance and user experience optimization.",
-    technologies: ["Vue.js", "Python", "PostgreSQL", "Docker"],
-    achievements: [
-      "Built responsive web applications serving 10,000+ daily active users",
-      "Reduced page load times by 40% through code optimization and caching strategies",
-      "Implemented automated testing reducing bugs in production by 60%",
-    ],
-  },
-  {
-    year: "2020-06",
-    period: "2022-07",
-    title: "Frontend Developer",
-    company: "Creative Agency",
-    location: "New York, USA",
-    description:
-      "Created responsive web interfaces and collaborated with design teams to deliver pixel-perfect implementations.",
-    technologies: ["JavaScript", "CSS", "React", "Figma"],
-    achievements: [
-      "Delivered 25+ high-quality web projects for diverse client portfolio",
-      "Improved cross-browser compatibility reducing support tickets by 45%",
-      "Collaborated with UX team to increase user satisfaction scores by 35%",
-    ],
-  },
-];
+const timelineEvents = experienceData.experiences.map((exp) => ({
+  year: exp.startDate,
+  period: exp.current ? "Present" : exp.endDate,
+  title: exp.position,
+  company: exp.company,
+  location: exp.location,
+  description: exp.description,
+  technologies: exp.technologies,
+  achievements: exp.achievements || [],
+}));
 
 const technologyIcons: Record<string, { icon: any; color: string }> = {
   React: { icon: SiReact, color: "#61DAFB" },
@@ -112,10 +65,12 @@ export function Experience() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Experience</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            {portfolioData.sections.experience.title}
+          </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            My professional journey and the impact I've made throughout my
-            career
+            {portfolioData.sections.experience.subtitle}. My professional
+            journey and the impact I've made throughout my career.
           </p>
         </motion.div>
 
@@ -205,25 +160,28 @@ export function Experience() {
                           if (techInfo) {
                             const IconComponent = techInfo.icon;
                             return (
-                              <Badge variant="dark:primary secondary" key={tech}>
-                                <IconComponent
-                                  className="text-sm"
-                                  style={{ color: techInfo.color }}
-                                />
-                                <span className="text-gray-700 dark:text-gray-300">
-                                  {tech}
-                                </span>
-                              </Badge>
+                              <Chip
+                                key={tech}
+                                icon={
+                                  <IconComponent
+                                    style={{ color: techInfo.color }}
+                                  />
+                                }
+                                label={tech}
+                                variant="outlined"
+                                size="small"
+                                sx={{ fontSize: "0.75rem" }}
+                              />
                             );
                           }
                           return (
-                            <Badge
+                            <Chip
                               key={tech}
-                              variant="secondary"
-                              className="text-xs"
-                            >
-                              {tech}
-                            </Badge>
+                              label={tech}
+                              variant="outlined"
+                              size="small"
+                              sx={{ fontSize: "0.75rem" }}
+                            />
                           );
                         })}
                       </div>
@@ -238,7 +196,7 @@ export function Experience() {
                         {event.achievements.map((achievement, idx) => (
                           <li
                             key={idx}
-                            className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-200"
+                            className="flex items-start gap-3 text-sm text- dark:text-gray-200"
                           >
                             <span className="w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-blue-400 mt-2 flex-shrink-0"></span>
                             <span className="leading-relaxed">
@@ -273,26 +231,26 @@ export function Experience() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
                 {
-                  number: "50+",
-                  label: "Projects Delivered",
+                  number: portfolioData.stats.projectsCompleted,
+                  label: "Projects Completed",
                   icon: "🚀",
                   color: "from-blue-500 to-blue-600",
                 },
                 {
-                  number: "6+",
+                  number: portfolioData.stats.yearsExperience,
                   label: "Years Experience",
                   icon: "⏱️",
                   color: "from-green-500 to-green-600",
                 },
                 {
-                  number: "15+",
+                  number: `${skillsData.skills.length}+`,
                   label: "Technologies Mastered",
                   icon: "⚡",
                   color: "from-purple-500 to-purple-600",
                 },
                 {
-                  number: "25+",
-                  label: "Happy Clients",
+                  number: portfolioData.stats.clientSatisfaction,
+                  label: "Client Satisfaction",
                   icon: "👥",
                   color: "from-orange-500 to-orange-600",
                 },
@@ -311,7 +269,7 @@ export function Experience() {
                 >
                   <div className="text-2xl mb-2">{stat.icon}</div>
                   <div
-                    className={`text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-1`}
+                    className={`text-2xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text mb-1`}
                   >
                     {stat.number}
                   </div>

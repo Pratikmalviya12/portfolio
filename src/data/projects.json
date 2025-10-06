@@ -1,0 +1,137 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "title": "Template Designer Application",
+      "description": "Interactive drag-and-drop template designer for custom email templates",
+      "longDescription": "Developed an interactive drag-and-drop template designer enabling users to create custom email templates. Built with modern React technologies and featuring real-time preview capabilities, component library, and seamless template export functionality.",
+      "technologies": ["React", "HTML5 Drag and Drop API", "CSS", "TypeScript"],
+      "category": "frontend",
+      "featured": true,
+      "year": 2024,
+      "status": "completed",
+      "demoUrl": "https://template-designer-omega.vercel.app/",
+      "githubUrl": "https://github.com/Pratikmalviya12/template-designer",
+      "images": [
+        "/images/projects/template-designer-1.jpg",
+        "/images/projects/template-designer-2.jpg"
+      ],
+      "features": [
+        "Implemented dynamic HTML generation and export functionality for seamless template download",
+        "Built responsive UI components with real-time preview capabilities",
+        "Visual template builder with intuitive drag-and-drop interface",
+        "Component library for reusable email template elements",
+        "HTML export with cross-browser compatibility",
+        "Real-time preview of template changes"
+      ],
+      "achievements": [
+        "Seamless template creation and download experience",
+        "Cross-browser compatible HTML export",
+        "Intuitive drag-and-drop interface",
+        "Responsive design for all devices"
+      ],
+      "challenges": [
+        "Implementing complex drag-and-drop functionality",
+        "Ensuring cross-browser HTML export compatibility",
+        "Creating a seamless user experience for template building"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Product Analytics Dashboard",
+      "description": "Comprehensive analytics dashboard for product performance tracking",
+      "longDescription": "A powerful analytics dashboard that provides comprehensive insights into product performance, user behavior, and business metrics. Built with modern web technologies to deliver real-time data visualization and interactive reporting capabilities.",
+      "technologies": ["React", "TypeScript", "Chart.js", "D3.js", "Node.js"],
+      "category": "fullstack",
+      "featured": true,
+      "year": 2024,
+      "status": "completed",
+      "demoUrl": "https://product-analytics-dashboard-weld.vercel.app/",
+      "githubUrl": "https://github.com/Pratikmalviya12/Product-Analytics-Dashboard",
+      "images": [
+        "/images/projects/analytics-dashboard-1.jpg",
+        "/images/projects/analytics-dashboard-2.jpg"
+      ],
+      "features": [
+        "Real-time data visualization and reporting",
+        "Interactive charts and graphs with D3.js",
+        "Comprehensive product performance metrics",
+        "User behavior analytics and insights",
+        "Customizable dashboard layouts",
+        "Export functionality for reports and data"
+      ],
+      "challenges": [
+        "Handling large datasets efficiently",
+        "Creating responsive data visualizations",
+        "Implementing real-time data updates"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Video Catalog Application",
+      "description": "Modern video catalog app with advanced search and filtering",
+      "longDescription": "A comprehensive video catalog application that allows users to browse, search, and manage video collections. Features advanced filtering capabilities, responsive design, and intuitive user experience for video content management.",
+      "technologies": ["React", "TypeScript", "CSS", "JavaScript"],
+      "category": "frontend",
+      "featured": true,
+      "year": 2024,
+      "status": "completed",
+      "demoUrl": "https://video-catalog-app-nu.vercel.app/",
+      "githubUrl": "https://github.com/Pratikmalviya12/video-catalog-app",
+      "images": [
+        "/images/projects/video-catalog-1.jpg",
+        "/images/projects/video-catalog-2.jpg"
+      ],
+      "features": [
+        "Advanced search and filtering capabilities",
+        "Responsive video catalog interface",
+        "Category-based video organization",
+        "Video preview and details modal",
+        "Modern and intuitive user interface",
+        "Mobile-responsive design"
+      ],
+      "challenges": [
+        "Implementing efficient search algorithms",
+        "Creating responsive video layouts",
+        "Managing video metadata and organization"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "all",
+      "name": "All Projects",
+      "description": "View all projects"
+    },
+    {
+      "id": "fullstack",
+      "name": "Full Stack",
+      "description": "Complete web applications with frontend and backend"
+    },
+    {
+      "id": "frontend",
+      "name": "Frontend",
+      "description": "User interface and client-side applications"
+    },
+    {
+      "id": "backend",
+      "name": "Backend",
+      "description": "Server-side applications and APIs"
+    }
+  ],
+  "technologies": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "PostgreSQL",
+    "Socket.io",
+    "Docker",
+    "AWS",
+    "Stripe",
+    "JWT",
+    "Chart.js",
+    "Redis"
+  ]
+}

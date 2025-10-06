@@ -2,9 +2,7 @@ import { motion } from 'motion/react'
 import { useInView } from 'motion/react'
 import { useRef, useState } from 'react'
 import { Calendar, Clock, ArrowRight, Tag } from 'lucide-react'
-import { Card, CardContent, CardHeader } from './ui/card'
-import { Badge } from './ui/badge'
-import { Button } from './ui/button'
+import { Card, CardContent, CardHeader, Chip, Button, IconButton } from '@mui/material'
 import { ImageWithFallback } from './figma/ImageWithFallback'
 
 const blogPosts = [
@@ -146,7 +144,7 @@ export function Blog() {
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute top-4 left-4">
-                      <Badge>{post.category}</Badge>
+                      <Chip label={post.category} color="primary" variant="filled" size="small" />
                     </div>
                   </div>
                   <CardContent className="p-6">
@@ -169,9 +167,7 @@ export function Blog() {
                     <div className="flex items-center justify-between">
                       <div className="flex flex-wrap gap-1">
                         {post.tags.slice(0, 2).map((tag) => (
-                          <Badge key={tag} variant="outline" className="text-xs">
-                            {tag}
-                          </Badge>
+                          <Chip key={tag} label={tag} variant="outlined" size="small" sx={{ fontSize: '0.75rem', height: '20px' }} />
                         ))}
                       </div>
                       <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -193,12 +189,12 @@ export function Blog() {
           {categories.map((category) => (
             <Button
               key={category}
-              variant={activeCategory === category ? "default" : "outline"}
-              size="sm"
+              variant={activeCategory === category ? "contained" : "outlined"}
+              size="small"
               onClick={() => setActiveCategory(category)}
-              className="transition-all duration-200"
+              sx={{ textTransform: 'none', transition: 'all 0.2s' }}
+              startIcon={<Tag className="h-3 w-3" />}
             >
-              <Tag className="mr-2 h-3 w-3" />
               {category}
             </Button>
           ))}
@@ -230,7 +226,7 @@ export function Blog() {
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute top-3 left-3">
-                      <Badge variant="secondary">{post.category}</Badge>
+                      <Chip label={post.category} color="primary" variant="filled" size="small" />
                     </div>
                   </div>
                 </CardHeader>
@@ -254,9 +250,7 @@ export function Blog() {
                   <div className="flex items-center justify-between">
                     <div className="flex flex-wrap gap-1">
                       {post.tags.slice(0, 2).map((tag) => (
-                        <Badge key={tag} variant="outline" className="text-xs">
-                          {tag}
-                        </Badge>
+                        <Chip key={tag} label={tag} variant="outlined" size="small" sx={{ fontSize: '0.75rem', height: '20px' }} />
                       ))}
                     </div>
                     <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
@@ -289,16 +283,20 @@ export function Blog() {
                   alt={selectedPost.title}
                   className="w-full h-full object-cover"
                 />
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="absolute top-4 right-4"
+                <IconButton
                   onClick={() => setSelectedPost(null)}
+                  sx={{ 
+                    position: 'absolute', 
+                    top: '16px', 
+                    right: '16px',
+                    backgroundColor: 'background.paper'
+                  }}
+                  size="small"
                 >
                   ✕
-                </Button>
+                </IconButton>
                 <div className="absolute bottom-4 left-4">
-                  <Badge>{selectedPost.category}</Badge>
+                  <Chip label={selectedPost.category} color="primary" variant="filled" size="small" />
                 </div>
               </div>
               <div className="p-6">
@@ -316,9 +314,7 @@ export function Blog() {
                 <p className="text-muted-foreground mb-6">{selectedPost.content}</p>
                 <div className="flex flex-wrap gap-2">
                   {selectedPost.tags.map((tag) => (
-                    <Badge key={tag} variant="outline">
-                      {tag}
-                    </Badge>
+                    <Chip key={tag} label={tag} variant="outlined" size="small" />
                   ))}
                 </div>
               </div>

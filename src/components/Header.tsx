@@ -1,45 +1,45 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'motion/react'
-import { Moon, Sun, Menu, X } from 'lucide-react'
-import { Button } from './ui/button'
-import { useTheme } from './ThemeProvider'
+import { useState, useEffect } from "react";
+import { motion } from "motion/react";
+import { Moon, Sun, Menu, X } from "lucide-react";
+import { Button, IconButton } from "@mui/material";
+import { useTheme } from "./ThemeProvider";
 
 const navItems = [
-  { name: 'Home', href: '#hero' },
-  { name: 'About', href: '#about' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Contact', href: '#contact' }
-]
+  { name: "Home", href: "#hero" },
+  { name: "About", href: "#about" },
+  { name: "Experience", href: "#experience" },
+  { name: "Projects", href: "#projects" },
+  { name: "Skills", href: "#skills" },
+  { name: "Contact", href: "#contact" },
+];
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href)
+    const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMobileMenuOpen(false)
-  }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-background/80 backdrop-blur-md border-b border-border' 
-          : 'bg-transparent'
+        isScrolled
+          ? "bg-background/80 backdrop-blur-md border-b border-border"
+          : "bg-transparent"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -79,48 +79,46 @@ export function Header() {
 
           {/* Theme Toggle & Mobile Menu */}
           <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+            <IconButton
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
               className="relative"
+              size="small"
             >
               <motion.div
                 initial={false}
-                animate={{ rotate: theme === 'dark' ? 180 : 0 }}
+                animate={{ rotate: theme === "dark" ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
               >
-                {theme === 'light' ? (
+                {theme === "dark" ? (
                   <Moon className="h-4 w-4" />
                 ) : (
                   <Sun className="h-4 w-4" />
                 )}
               </motion.div>
-            </Button>
+            </IconButton>
 
             {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="sm"
+            <IconButton
               className="md:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              size="small"
             >
               {isMobileMenuOpen ? (
                 <X className="h-4 w-4" />
               ) : (
                 <Menu className="h-4 w-4" />
               )}
-            </Button>
+            </IconButton>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         <motion.nav
-          className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}
+          className={`md:hidden ${isMobileMenuOpen ? "block" : "hidden"}`}
           initial={{ opacity: 0, height: 0 }}
-          animate={{ 
+          animate={{
             opacity: isMobileMenuOpen ? 1 : 0,
-            height: isMobileMenuOpen ? 'auto' : 0
+            height: isMobileMenuOpen ? "auto" : 0,
           }}
           transition={{ duration: 0.3 }}
         >
@@ -140,5 +138,5 @@ export function Header() {
         </motion.nav>
       </div>
     </motion.header>
-  )
+  );
 }

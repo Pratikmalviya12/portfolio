@@ -1,30 +1,31 @@
-import { useEffect, useRef } from 'react'
-import { motion } from 'motion/react'
-import { Github, Linkedin, Mail, Download, ArrowDown } from 'lucide-react'
-import { Button } from './ui/button'
-import { ImageWithFallback } from './figma/ImageWithFallback'
+import { useEffect, useRef } from "react";
+import { motion } from "motion/react";
+import { Github, Linkedin, Mail, Download, ArrowDown } from "lucide-react";
+import { Button } from "@mui/material";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { portfolioData } from "../data";
 
 export function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     const particles: Array<{
-      x: number
-      y: number
-      vx: number
-      vy: number
-      size: number
-      opacity: number
-    }> = []
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+      opacity: number;
+    }> = [];
 
     // Create particles
     for (let i = 0; i < 50; i++) {
@@ -34,71 +35,80 @@ export function Hero() {
         vx: (Math.random() - 0.5) * 0.5,
         vy: (Math.random() - 0.5) * 0.5,
         size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.1
-      })
+        opacity: Math.random() * 0.5 + 0.1,
+      });
     }
 
     function animate() {
-      if (!ctx || !canvas) return
-      
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      if (!ctx || !canvas) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle, index) => {
-        particle.x += particle.vx
-        particle.y += particle.vy
+        particle.x += particle.vx;
+        particle.y += particle.vy;
 
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1
+        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
 
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(99, 102, 241, ${particle.opacity})`
-        ctx.fill()
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(99, 102, 241, ${particle.opacity})`;
+        ctx.fill();
 
         // Connect nearby particles
-        particles.slice(index + 1).forEach(otherParticle => {
-          const dx = particle.x - otherParticle.x
-          const dy = particle.y - otherParticle.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
+        particles.slice(index + 1).forEach((otherParticle) => {
+          const dx = particle.x - otherParticle.x;
+          const dy = particle.y - otherParticle.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < 100) {
-            ctx.beginPath()
-            ctx.moveTo(particle.x, particle.y)
-            ctx.lineTo(otherParticle.x, otherParticle.y)
-            ctx.strokeStyle = `rgba(99, 102, 241, ${0.1 * (1 - distance / 100)})`
-            ctx.stroke()
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.strokeStyle = `rgba(99, 102, 241, ${
+              0.1 * (1 - distance / 100)
+            })`;
+            ctx.stroke();
           }
-        })
-      })
+        });
+      });
 
-      requestAnimationFrame(animate)
+      requestAnimationFrame(animate);
     }
 
-    animate()
+    animate();
 
     const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
 
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:hello@example.com', label: 'Email' }
-  ]
+  const socialLinks = portfolioData.socialLinks.map((social) => ({
+    icon:
+      social.iconType === "github"
+        ? Github
+        : social.iconType === "linkedin"
+        ? Linkedin
+        : social.iconType === "twitter"
+        ? Mail
+        : Github,
+    href: social.url,
+    label: social.platform,
+  }));
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
       {/* Animated Background */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 -z-10 opacity-30"
-      />
-      
+      <canvas ref={canvasRef} className="absolute inset-0 -z-10 opacity-30" />
+
       {/* Background Image */}
       <div className="absolute inset-0 -z-20">
         <ImageWithFallback
@@ -128,7 +138,7 @@ export function Hero() {
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               >
-                JD
+                PM
               </motion.div>
             </div>
           </motion.div>
@@ -141,16 +151,16 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              John Developer
+              {portfolioData.personal.name}
             </motion.h1>
-            
+
             <motion.div
               className="text-xl md:text-2xl text-muted-foreground"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1 }}
             >
-              Full Stack Developer & UI/UX Designer
+              {portfolioData.personal.title}
             </motion.div>
 
             <motion.p
@@ -159,8 +169,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
-              I create beautiful, responsive web applications with modern technologies. 
-              Passionate about clean code, great user experiences, and innovative solutions.
+              {portfolioData.personal.description}
             </motion.p>
           </div>
 
@@ -171,13 +180,30 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.4 }}
           >
-            <Button size="lg" className="group">
+            <Button
+              variant="contained"
+              size="large"
+              className="group"
+              sx={{ textTransform: "none" }}
+              component="a"
+              href={portfolioData.personal.resume}
+              download="Pratik_Kumar_Malviya_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
               Download CV
             </Button>
-            <Button variant="outline" size="lg" onClick={() => {
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
-            }}>
+            <Button
+              variant="outlined"
+              size="large"
+              onClick={() => {
+                document
+                  .querySelector("#contact")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              sx={{ textTransform: "none" }}
+            >
               Get In Touch
             </Button>
           </motion.div>
@@ -223,5 +249,5 @@ export function Hero() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
