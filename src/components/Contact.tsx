@@ -5,10 +5,11 @@ import {
   Mail,
   Phone,
   MapPin,
-  Send,
   Github,
   Linkedin,
-  Twitter,
+  Send,
+  CheckCircle,
+  AlertCircle,
 } from "lucide-react";
 import {
   Card,
@@ -45,8 +46,7 @@ const contactInfo = [
 
 const socialLinks = portfolioData.socialLinks.map(social => ({
   icon: social.iconType === 'github' ? Github : 
-        social.iconType === 'linkedin' ? Linkedin : 
-        social.iconType === 'twitter' ? Twitter : Github,
+        social.iconType === 'linkedin' ? Linkedin : Github,
   label: social.platform,
   href: social.url,
   color: social.platform === 'GitHub' ? 'hover:text-gray-600' :

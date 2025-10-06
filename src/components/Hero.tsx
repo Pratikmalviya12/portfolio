@@ -94,8 +94,6 @@ export function Hero() {
         ? Github
         : social.iconType === "linkedin"
         ? Linkedin
-        : social.iconType === "twitter"
-        ? Mail
         : Github,
     href: social.url,
     label: social.platform,

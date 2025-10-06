@@ -51,8 +51,7 @@ export function Footer() {
             <div className="flex gap-2 flex-wrap">
               {portfolioData.socialLinks.map((social) => {
                 const Icon = social.iconType === 'github' ? Github : 
-                           social.iconType === 'linkedin' ? Linkedin : 
-                           social.iconType === 'twitter' ? Mail : Github;
+                           social.iconType === 'linkedin' ? Linkedin : Github;
                 return (
                   <motion.a
                     key={social.platform}
