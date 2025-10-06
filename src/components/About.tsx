@@ -58,7 +58,7 @@ export function About() {
               <div className="w-80 h-80 mx-auto bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 rounded-3xl p-8 shadow-2xl">
                 <div className="w-full h-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-white/10">
                   <span className="text-8xl font-bold text-black">
-                    Pratik Malviya
+                    {portfolioData.personal.name}
                   </span>
                 </div>
               </div>
